@@ -1,0 +1,31 @@
+/* H1: punto focale - rosso profondo */
+.cm-header-1,
+.HyperMD-header-1,
+.markdown-preview-view h1 {
+    color: #ca0000 !important; 
+    font-size: 2.5em !important; /* Aumenta la dimensione del font per H1 */
+}
+
+/* H2: sezione principale - rosso mattone */
+.cm-header-2,
+.HyperMD-header-2,
+.markdown-preview-view h2 {
+    color: #dc6026 !important; 
+    font-size: 2em !important; /* Aumenta la dimensione del font per H2, ma meno di H1 */
+}
+
+/* H3: sotto-sezione - corallo */
+.cm-header-3,
+.HyperMD-header-3,
+.markdown-preview-view h3 {
+    color: #eac10c !important; 
+    font-size: 1.6em !important;
+}
+
+/* H4: dettaglio - rame scuro */
+.cm-header-4,
+.HyperMD-header-4,
+.markdown-preview-view h4 {
+    color: #6fc50c !important; 
+    font-size: 1.3em !important;
+}

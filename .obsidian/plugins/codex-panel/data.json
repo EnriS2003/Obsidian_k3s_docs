@@ -1,0 +1,12 @@
+{
+  "codexPath": "C:\\Users\\a0012934\\AppData\\Roaming\\npm\\codex.cmd",
+  "threadNamingModel": null,
+  "threadNamingEffort": null,
+  "rewriteSelectionModel": null,
+  "rewriteSelectionEffort": null,
+  "sendShortcut": "enter",
+  "archiveExportEnabled": false,
+  "archiveExportFolderTemplate": "Codex Archives",
+  "archiveExportFilenameTemplate": "{{date}} {{time}} {{title}} {{shortId}}.md",
+  "archiveExportTags": ""
+}
