@@ -28,7 +28,7 @@ Gli esperimenti possono essere classificati così alla fine:
 Quello che ho capito: è importante definire 5/7 esperimenti fondamentali, tesatrli e trarre delle conlusioni. Dopo si trova una soluzione e si testa quella soluzione. Poi si fa un comparison.
 
 ---
-## Elaborazione idee/esperimenti dal meeting con Peter
+## Elaborazione idee/esperimenti dal meeting con Peterr
 
 ### 1. Salvare la baseline #tag
 
