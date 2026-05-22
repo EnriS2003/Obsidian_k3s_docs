@@ -13,7 +13,7 @@
     3. Testare come reagisce k3s a una mancanza di risorse.
 3. Come ho installato k3s: packages e cose varie che a loro potrebbero tornare utili.
 
-## Elaborazione idee/esperimenti dal meeting con Peter
+## Elaborazione idee/esperimenti dal meeting con Peter 
 
 ### 1. Salvare la baseline
 
