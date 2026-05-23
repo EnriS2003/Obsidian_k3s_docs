@@ -64,7 +64,8 @@ Important distinction:
 
 ```text
 The three Alpine VMs form the k3s cluster.
-The Rancher VM is external and is not part of the cluster.
+The Rancher server VM is external and is not part of the cluster.
+Rancher agents still run inside the cluster in namespaces such as cattle-system and cattle-fleet-system.
 MetalLB provides the stable application entrypoint after the cluster is running.
 ```
 
@@ -312,6 +313,7 @@ kubectl get ns
 kubectl get pods -n metallb-system -o wide
 kubectl get svc -n kube-system traefik -o wide
 kubectl get ingress -n prototype -o wide
+kubectl get ipaddresspool -n metallb-system
 ```
 
 From Windows PowerShell:
@@ -370,62 +372,95 @@ Legacy/direct node-IP access may still be useful for troubleshooting, but the Me
 
 ---
 
-## 9. Final Hyper-V Checkpoint
+## 9. Hyper-V Checkpoint Status
 
-After the application was fixed and browser access worked, a new checkpoint was created.
-
-Checkpoint name:
+The documented checkpoint that is known from this report is:
 
 ```text
 baseline-b-app-ready
 ```
 
-This checkpoint refers to the application-ready state before the later MetalLB-oriented documentation update. If a new checkpoint is created after the MetalLB VIP configuration, the recommended checkpoint name is:
+This checkpoint represents the application-ready state of Baseline B: the three-node k3s HA cluster was running, the prototype was deployed, the missing Service manifests had been added, and browser access was working.
+
+After MetalLB was introduced, a more precise checkpoint name would be:
 
 ```text
 baseline-b-app-ready-metallb-vip
 ```
 
-Meaning:
+However, the existence of this MetalLB-specific checkpoint has not been verified from inside the cluster VM. Therefore, it should be treated as a recommended checkpoint name unless it is confirmed from the Hyper-V host.
 
-```text
-3-node k3s HA cluster
-Prototype deployed
-Application services available
-Web UI reachable from browser
-Manifest folder updated with missing Service YAML files
-```
-
-PowerShell command:
+Recommended PowerShell command if the MetalLB-ready checkpoint still needs to be created:
 
 ```powershell
-Checkpoint-VM -Name "b-k3s-1" -SnapshotName "baseline-b-app-ready"
-Checkpoint-VM -Name "b-k3s-2" -SnapshotName "baseline-b-app-ready"
-Checkpoint-VM -Name "b-k3s-3" -SnapshotName "baseline-b-app-ready"
+Checkpoint-VM -Name "b-k3s-1" -SnapshotName "baseline-b-app-ready-metallb-vip"
+Checkpoint-VM -Name "b-k3s-2" -SnapshotName "baseline-b-app-ready-metallb-vip"
+Checkpoint-VM -Name "b-k3s-3" -SnapshotName "baseline-b-app-ready-metallb-vip"
 ```
 
 ---
 
-## 10. Current Status Summary
+## 10. Current Verified State
+
+The current checked state of Baseline B matches the intended architecture.
+
+Cluster nodes:
+
+```text
+NAME      STATUS   ROLES                INTERNAL-IP
+b-k3s-1   Ready    control-plane,etcd   192.168.100.41
+b-k3s-2   Ready    control-plane,etcd   192.168.100.42
+b-k3s-3   Ready    control-plane,etcd   192.168.100.43
+```
+
+Traefik exposure:
+
+```text
+NAMESPACE     NAME      TYPE           EXTERNAL-IP      PORTS
+kube-system   traefik   LoadBalancer   192.168.100.50   80/TCP,443/TCP
+```
+
+Prototype ingress:
+
+```text
+NAMESPACE   NAME                CLASS     HOSTS   ADDRESS          PORTS
+prototype   prototype-ingress   traefik   *       192.168.100.50   80
+```
+
+MetalLB address pool:
+
+```text
+NAMESPACE        NAME                 ADDRESSES
+metallb-system   baseline-b-vip-pool  192.168.100.50/32
+```
+
+Application workload state:
+
+```text
+api-backend       3/3 Running   one pod per node
+web-ui            3/3 Running   one pod per node
+logic-simulator   1/1 Running
+data-generator    1/1 Running
+```
+
+Summary:
 
 | Area | Status |
 |---|---|
 | 3-node k3s cluster | OK |
 | All nodes server/control-plane/etcd | OK |
 | Embedded etcd HA baseline | OK |
-| System pods | OK |
-| Prototype images on all nodes | OK |
-| Prototype manifests applied | OK |
+| Traefik LoadBalancer | OK, `192.168.100.50` |
+| MetalLB IPAddressPool | OK, `baseline-b-vip-pool` with `192.168.100.50/32` |
+| Prototype ingress | OK, points to `192.168.100.50` |
 | `api-backend` | OK, 3/3 |
 | `web-ui` | OK, 3/3 |
 | `logic-simulator` | OK, 1/1 |
 | `data-generator` | OK, 1/1 |
-| Services | OK |
-| Ingress | OK |
-| Browser access through node IPs | OK |
-| MetalLB VIP `192.168.100.50` | OK / main endpoint for future tests |
+| Rancher server | External to the cluster |
+| Rancher agents | Present inside the cluster through Rancher namespaces |
 | Browser access through MetalLB VIP | OK |
-| Hyper-V checkpoint | OK; recommended additional checkpoint after MetalLB |
+| Hyper-V checkpoint | `baseline-b-app-ready` documented; MetalLB-specific checkpoint recommended/needs host confirmation |
 
 ---
 
@@ -565,6 +600,8 @@ kubectl logs -n prototype deployment/web-ui --previous
 ```sh
 kubectl get pods -n metallb-system -o wide
 kubectl get svc -n kube-system traefik -o wide
+kubectl get ingress -n prototype -o wide
+kubectl get ipaddresspool -n metallb-system
 ```
 
 ### Browser test

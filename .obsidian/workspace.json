@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "baseline-b-k3s-HA-installation-with-metallb.md",
+                "file": "Appunti/EXP3_MainNodeFailure_procedure_all_runs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "baseline-b-k3s-HA-installation-with-metallb"
+              "title": "EXP3_MainNodeFailure_procedure_all_runs"
             }
           }
         ],
@@ -199,13 +199,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "baseline-b-k3s-HA-installation-with-metallb.md",
+                "file": "Appunti/EXP3_MainNodeFailure_procedure_all_runs.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of baseline-b-k3s-HA-installation-with-metallb"
+              "title": "Outline of EXP3_MainNodeFailure_procedure_all_runs"
             }
           },
           {
@@ -283,15 +283,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0d0d5aef6abbcb61",
+  "active": "308df256938dd905",
   "lastOpenFiles": [
-    "baseline-b-k3s-ha-installation.md",
-    "baseline-b-k3s-HA-installation-with-metallb.md",
-    "BaselineB-FileDiConfig/Baseline B - step di configurazione.md",
-    "Baseline A - pre-creazione della baseline B -- FASE 0_congelare baseline a.md",
-    "Untitled/desktop.ini",
-    "BaselineB-FileDiConfig",
+    "BaselineB-note/Baseline B - ESPERIMENTI.md",
+    "Appunti/EXP3_MainNodeFailure_procedure_all_runs.md",
+    "BaselineB-note/baseline-b-k3s-HA-installation-with-metallb.md",
     "Punto di partenza.md",
+    "Baseline A - pre-creazione della baseline B -- FASE 0_congelare baseline a.md",
+    "baseline-b-k3s-ha-installation.md",
+    "Untitled/desktop.ini",
+    "BaselineB-note",
     "Appunti/Meeting con Robert/Meeting Robert 21-05-26.md",
     "Appunti/Appunti dei meeting.md",
     "Appunti/Meeting con Robert/desktop.ini",
@@ -320,7 +321,6 @@
     "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
     "copilot/copilot-custom-prompts",
     "copilot",
-    "node_modules/tea/History.md",
     "node_modules/highlight.js/src/styles/school_book.png",
     "node_modules/highlight.js/src/styles/brown_papersq.png",
     "node_modules/connect/lib/public/icons/page_world.png",
